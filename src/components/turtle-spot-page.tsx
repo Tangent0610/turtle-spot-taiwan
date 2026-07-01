@@ -182,7 +182,7 @@ function Header({
   onMenuToggle: () => void;
 }) {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isSoundMuted, setIsSoundMuted] = useState(false);
+  const [isSoundMuted, setIsSoundMuted] = useState(true);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -219,27 +219,26 @@ function Header({
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-start justify-between max-lg:h-10 max-sm:h-8">
+    <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-start justify-between max-xl:h-10 max-sm:h-8">
       <audio
         ref={audioRef}
-        autoPlay
         loop
-        preload="auto"
+        preload="none"
         src={assetPath("/audio/ambient-loop.ogg")}
       />
       <div
-        className={`flex h-14 items-center gap-2.5 whitespace-nowrap pl-5 text-[18px] font-black tracking-[-0.01em] transition-colors max-lg:h-10 max-lg:gap-2 max-lg:text-[12px] max-sm:h-8 max-sm:pl-3 max-sm:text-[11px] ${
+        className={`flex h-14 items-center gap-2.5 whitespace-nowrap pl-5 text-[18px] font-black tracking-[-0.01em] transition-colors max-xl:h-10 max-xl:gap-2 max-xl:text-[12px] max-sm:h-8 max-sm:pl-3 max-sm:text-[11px] ${
           isMenuOpen ? "text-[#F5FDFF]" : "text-[#161616]"
         }`}
       >
-        <FocusIcon className="h-6 w-6 shrink-0 max-lg:h-4 max-lg:w-4 max-sm:h-4 max-sm:w-4" />
+        <FocusIcon className="h-6 w-6 shrink-0 max-xl:h-4 max-xl:w-4 max-sm:h-4 max-sm:w-4" />
         <span>Turtle Spot Taiwan</span>
       </div>
 
-      <div className="flex h-14 items-stretch text-[#F5FDFF] max-lg:h-10 max-sm:h-8">
+      <div className="flex h-14 items-stretch text-[#F5FDFF] max-xl:h-10 max-sm:h-8">
         <button
           aria-label="Toggle language"
-          className="flex w-[60px] cursor-pointer items-center justify-center rounded-bl-xl bg-[#161616] text-[16px] font-black tracking-[0.08em] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-lg:w-10 max-lg:text-[13px] max-sm:w-8 max-sm:text-[12px]"
+          className="flex w-[60px] cursor-pointer items-center justify-center rounded-bl-xl bg-[#161616] text-[16px] font-black tracking-[0.08em] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-xl:w-10 max-xl:text-[13px] max-sm:w-8 max-sm:text-[12px]"
           onClick={onLocaleToggle}
           type="button"
         >
@@ -251,24 +250,24 @@ function Header({
           pressed={!isSoundMuted}
         >
           {isSoundMuted ? (
-            <MutedSpeakerIcon className="h-5 w-5 max-lg:h-4 max-lg:w-4 max-sm:h-3.5 max-sm:w-3.5" />
+            <MutedSpeakerIcon className="h-5 w-5 max-xl:h-4 max-xl:w-4 max-sm:h-3.5 max-sm:w-3.5" />
           ) : (
-            <SpeakerIcon className="h-5 w-5 max-lg:h-4 max-lg:w-4 max-sm:h-3.5 max-sm:w-3.5" />
+            <SpeakerIcon className="h-5 w-5 max-xl:h-4 max-xl:w-4 max-sm:h-3.5 max-sm:w-3.5" />
           )}
         </IconButton>
         <button
           aria-expanded={isMenuOpen}
           aria-label={isMenuOpen ? dictionary.closeMenu : dictionary.openMenu}
-          className="flex w-[132px] cursor-pointer items-center justify-center gap-2 bg-[#161616] text-[11px] font-black tracking-[0.18em] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-lg:w-10 max-lg:gap-0 max-sm:w-8"
+          className="flex w-[132px] cursor-pointer items-center justify-center gap-2 bg-[#161616] text-[11px] font-black tracking-[0.18em] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-xl:w-10 max-xl:gap-0 max-sm:w-8"
           onClick={onMenuToggle}
           type="button"
         >
           {isMenuOpen ? (
-            <CloseIcon className="h-5 w-5 max-lg:h-4 max-lg:w-4 max-sm:h-3.5 max-sm:w-3.5" />
+            <CloseIcon className="h-5 w-5 max-xl:h-4 max-xl:w-4 max-sm:h-3.5 max-sm:w-3.5" />
           ) : (
-            <MenuIcon className="h-4 w-6 max-lg:h-3.5 max-lg:w-5 max-sm:h-3 max-sm:w-4" />
+            <MenuIcon className="h-4 w-6 max-xl:h-3.5 max-xl:w-5 max-sm:h-3 max-sm:w-4" />
           )}
-          <span className="max-lg:hidden">MENU</span>
+          <span className="max-xl:hidden">MENU</span>
         </button>
       </div>
     </header>
@@ -293,28 +292,28 @@ function MenuOverlay({
           : "invisible pointer-events-none opacity-0"
       }`}
     >
-      <div className="overflow-hidden rounded-b-[40px] bg-[#161616] text-[#F5FDFF] max-lg:rounded-b-[28px]">
-        <div className="mx-auto flex min-h-[560px] max-w-[1440px] flex-col px-20 pb-24 pt-44 max-lg:min-h-screen max-lg:px-10 max-lg:pb-16 max-lg:pt-28 max-sm:px-6">
+      <div className="overflow-hidden rounded-b-[40px] bg-[#161616] text-[#F5FDFF] max-xl:rounded-b-[28px]">
+        <div className="mx-auto flex min-h-[560px] max-w-[1440px] flex-col px-20 pb-24 pt-44 max-xl:min-h-screen max-xl:px-10 max-xl:pb-16 max-xl:pt-28 max-sm:px-6">
           <nav
-            className={`flex items-start justify-center max-lg:grid max-lg:grid-cols-1 max-lg:gap-7 ${
+            className={`flex items-start justify-center max-xl:grid max-xl:grid-cols-1 max-xl:gap-7 ${
               compactMenu ? "gap-10 max-xl:gap-7" : "gap-20 max-xl:gap-14"
             }`}
           >
             {navItems.map((item, index) => (
               <a
-                className="group block transition-transform hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#AAF5FA] max-lg:hover:translate-x-1 max-lg:hover:translate-y-0"
+                className="group block transition-transform hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#AAF5FA] max-xl:hover:translate-x-1 max-xl:hover:translate-y-0"
                 href="#"
                 key={item.title}
               >
                 <span
-                  className={`block whitespace-nowrap text-2xl font-black tracking-[0.04em] transition-colors group-hover:text-[#AAF5FA] max-lg:text-lg ${
+                  className={`block whitespace-nowrap text-2xl font-black tracking-[0.04em] transition-colors group-hover:text-[#AAF5FA] max-xl:text-lg ${
                     item.active ? "text-[#AAF5FA]" : "text-[#F5FDFF]"
                   }`}
                 >
                   {dictionary.navLabels[index]}
                 </span>
                 <span
-                  className={`mt-3 block whitespace-nowrap font-black leading-none tracking-[-0.01em] transition-colors group-hover:text-[#AAF5FA] max-lg:hidden ${
+                  className={`mt-3 block whitespace-nowrap font-black leading-none tracking-[-0.01em] transition-colors group-hover:text-[#AAF5FA] max-xl:hidden ${
                     item.active ? "text-[#AAF5FA]" : "text-[#F5FDFF]"
                   } ${compactMenu ? "text-[40px] max-xl:text-[36px]" : "text-[48px]"}`}
                 >
@@ -324,20 +323,20 @@ function MenuOverlay({
             ))}
           </nav>
 
-          <div className="mt-28 grid max-w-[920px] grid-cols-2 gap-32 max-lg:mt-14 max-lg:grid-cols-1 max-lg:gap-10">
+          <div className="mt-28 grid max-w-[920px] grid-cols-2 gap-32 max-xl:mt-14 max-xl:grid-cols-1 max-xl:gap-10">
             <div>
-              <p className="text-2xl font-black text-[#BFC8CA] max-lg:text-lg">
+              <p className="text-2xl font-black text-[#BFC8CA] max-xl:text-lg">
                 {dictionary.menuContact}
               </p>
-              <p className="mt-6 text-4xl font-black tracking-[-0.02em] max-lg:mt-3 max-lg:text-2xl">
+              <p className="mt-6 text-4xl font-black tracking-[-0.02em] max-xl:mt-3 max-xl:text-2xl">
                 info@gmail.com
               </p>
             </div>
             <div>
-              <p className="text-2xl font-black text-[#BFC8CA] max-lg:text-lg">
+              <p className="text-2xl font-black text-[#BFC8CA] max-xl:text-lg">
                 {dictionary.menuFollow}
               </p>
-              <p className="mt-6 whitespace-nowrap text-4xl font-black tracking-[-0.02em] max-lg:mt-3 max-lg:text-2xl">
+              <p className="mt-6 whitespace-nowrap text-4xl font-black tracking-[-0.02em] max-xl:mt-3 max-xl:text-2xl">
                 facebook / instagram
               </p>
             </div>
@@ -350,13 +349,13 @@ function MenuOverlay({
 
 function HeroSection({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative min-h-[1424px] overflow-hidden bg-[#AAF5FA] max-lg:min-h-[1180px] max-sm:min-h-[1580px]">
+    <section className="relative min-h-[1424px] overflow-hidden bg-[#AAF5FA] max-xl:min-h-[1180px] max-sm:min-h-[1580px]">
       <MarqueeText
-        className="top-[236px] text-[190px] text-[#F5FDFF]/80 max-lg:top-[161px] max-lg:text-[88px] max-sm:top-[190px]"
+        className="top-[236px] text-[190px] text-[#F5FDFF]/80 max-xl:top-[161px] max-xl:text-[88px] max-sm:top-[190px]"
         text="Information Information"
       />
 
-      <div className="absolute left-1/2 top-36 z-10 h-[394px] w-[394px] -translate-x-1/2 overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0] max-lg:top-[88px] max-lg:h-[234px] max-lg:w-[234px] max-sm:top-[120px]">
+      <div className="absolute left-1/2 top-36 z-10 h-[394px] w-[394px] -translate-x-1/2 overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0] max-xl:top-[88px] max-xl:h-[234px] max-xl:w-[234px] max-sm:top-[120px]">
         <Image
           alt="Sea turtle swimming over coral"
           className="object-cover"
@@ -375,15 +374,15 @@ function HeroSection({ dictionary }: { dictionary: Dictionary }) {
 
 function TurtleProfileCard({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative z-20 mx-auto mt-[687px] w-[922px] max-lg:mt-[430px] max-lg:w-[min(680px,calc(100%_-_80px))] max-sm:mx-0 max-sm:mt-[470px] max-sm:w-full">
-      <div className="absolute -top-[63px] left-0 flex h-[63px] w-[315px] items-center whitespace-nowrap rounded-t-2xl bg-[#E5EEF0] px-10 text-[18px] font-black max-lg:-top-14 max-lg:h-14 max-lg:w-full max-lg:px-6 max-lg:text-base">
+    <section className="relative z-20 mx-auto mt-[687px] w-[922px] max-xl:mt-[430px] max-xl:w-[min(680px,calc(100%_-_80px))] max-sm:mx-0 max-sm:mt-[470px] max-sm:w-full">
+      <div className="absolute -top-[63px] left-0 flex h-[63px] w-[315px] items-center whitespace-nowrap rounded-t-2xl bg-[#E5EEF0] px-10 text-[18px] font-black max-xl:-top-14 max-xl:h-14 max-xl:w-full max-xl:px-6 max-xl:text-base">
         淡定哥&nbsp;&nbsp; #TW01HOO84
       </div>
-      <div className="bg-white px-10 pb-10 pt-10 shadow-[0_1px_0_rgba(0,0,0,0.02)] max-lg:px-6">
+      <div className="bg-white px-10 pb-10 pt-10 shadow-[0_1px_0_rgba(0,0,0,0.02)] max-xl:px-6">
         <div className="grid grid-cols-2 gap-x-6 gap-y-6 max-sm:grid-cols-1">
           {turtleFacts.map((fact, index) => (
             <div
-              className={`border-b border-[#AAF5FA] pb-4 text-[15px] font-black leading-6 max-lg:text-sm ${
+              className={`border-b border-[#AAF5FA] pb-4 text-[15px] font-black leading-6 max-xl:text-sm ${
                 fact.wide ? "col-span-2 max-sm:col-span-1" : ""
               }`}
               key={index}
@@ -474,28 +473,28 @@ function PhotoCarousel() {
 
   return (
     <section className="relative overflow-hidden rounded-b-[40px] bg-[#E5EEF0] pb-20 pt-[120px] max-xl:py-20 max-md:rounded-b-[28px]">
-      <div className="relative mx-auto h-[590px] max-w-[1440px] max-[1179px]:h-auto max-[1179px]:px-6">
+      <div className="relative mx-auto h-[590px] max-w-[1440px] max-xl:h-auto max-xl:px-6">
         <CarouselImage
-          className="left-[calc(50%_-_1272px)] top-2 h-[529px] w-[706px] max-[1179px]:hidden"
+          className="left-[calc(50%_-_1272px)] top-2 h-[529px] w-[706px] max-xl:hidden"
           image={carouselImages[previousIndex]}
           isActive={false}
           sizes="706px"
         />
         <CarouselImage
-          className="left-1/2 top-[5px] h-[529px] w-[706px] -translate-x-1/2 max-[1179px]:relative max-[1179px]:left-auto max-[1179px]:top-0 max-[1179px]:mx-auto max-[1179px]:h-[420px] max-[1179px]:w-[calc(100vw_-_48px)] max-[1179px]:max-w-[704px] max-[1179px]:translate-x-0 max-md:aspect-[4/3] max-md:h-auto max-md:w-full"
+          className="left-1/2 top-[5px] h-[529px] w-[706px] -translate-x-1/2 max-xl:relative max-xl:left-auto max-xl:top-0 max-xl:mx-auto max-xl:h-[420px] max-xl:w-[calc(100vw_-_48px)] max-xl:max-w-[704px] max-xl:translate-x-0 max-md:aspect-[4/3] max-md:h-auto max-md:w-full"
           image={carouselImages[activeIndex]}
           isActive
-          sizes="(max-width: 1179px) calc(100vw - 48px), 706px"
+          sizes="(max-width: 1279px) calc(100vw - 48px), 706px"
         />
         <CarouselImage
-          className="left-[calc(50%_+_567px)] top-2 h-[529px] w-[706px] max-[1179px]:hidden"
+          className="left-[calc(50%_+_567px)] top-2 h-[529px] w-[706px] max-xl:hidden"
           image={carouselImages[nextIndex]}
           isActive={false}
           sizes="706px"
         />
 
         <ArrowButton
-          className="left-[calc(50%_-_504px)] top-[238px] max-[1179px]:hidden"
+          className="left-[calc(50%_-_504px)] top-[238px] max-xl:hidden"
           direction="left"
           onClick={() =>
             goToSlide(
@@ -505,14 +504,14 @@ function PhotoCarousel() {
           }
         />
         <ArrowButton
-          className="right-[calc(50%_-_504px)] top-[238px] max-[1179px]:hidden"
+          className="right-[calc(50%_-_504px)] top-[238px] max-xl:hidden"
           direction="right"
           onClick={() =>
             goToSlide((index) => (index + 1) % carouselImages.length)
           }
         />
 
-        <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-3 max-[1179px]:hidden">
+        <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-3 max-xl:hidden">
           {carouselImages.map((image, dot) => (
             <button
               aria-label={`${image.alt} slide`}
@@ -529,7 +528,7 @@ function PhotoCarousel() {
           ))}
         </div>
 
-        <div className="mt-8 hidden items-center justify-center gap-7 max-[1179px]:flex max-md:mt-9 max-md:gap-5">
+        <div className="mt-8 hidden items-center justify-center gap-7 max-xl:flex max-md:mt-9 max-md:gap-5">
           <ArrowButton
             className="!static !translate-y-0"
             direction="left"
@@ -601,20 +600,20 @@ function CarouselImage({
 
 function DiveSites({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative overflow-hidden rounded-b-[40px] bg-[#161616] max-lg:rounded-b-[28px]">
+    <section className="relative overflow-hidden rounded-b-[40px] bg-[#161616] max-xl:rounded-b-[28px]">
       <MarqueeText
-        className="top-[345px] text-[150px] text-[#515665]/80 max-lg:top-[324px] max-lg:text-[112px] max-md:top-[364px] max-md:text-[72px]"
+        className="top-[345px] text-[150px] text-[#515665]/80 max-xl:top-[324px] max-xl:text-[112px] max-md:top-[364px] max-md:text-[72px]"
         text="Favorite Dive Sites Favorite Dive Sites"
       />
-      <div className="relative z-10 min-h-[840px] max-lg:min-h-[760px] max-sm:min-h-[800px]">
+      <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[900px]">
         <PinMarker
-          className="left-[12vw] top-24 max-lg:left-[120px] max-lg:top-[50px] max-sm:left-1/2 max-sm:top-[21px] max-sm:-translate-x-1/2"
+          className="left-[12vw] top-24 max-xl:left-[120px] max-xl:top-[50px] max-sm:left-1/2 max-sm:top-[54px] max-sm:-translate-x-1/2"
           color="#AAF5FA"
           label={dictionary.favoriteDive}
           title="花瓶岩"
         />
         <PinMarker
-          className="right-[18vw] top-[374px] max-lg:right-[80px] max-lg:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[409px] max-sm:-translate-x-1/2"
+          className="right-[18vw] top-[374px] max-xl:right-[80px] max-xl:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[515px] max-sm:-translate-x-1/2"
           color="#F5FDFF"
           label={dictionary.favoriteDive}
           title="美人洞"
@@ -637,16 +636,19 @@ function PinMarker({
 }) {
   return (
     <div
-      className={`absolute h-[370px] w-[286px] max-lg:scale-75 max-sm:scale-[0.68] ${className}`}
+      className={`absolute h-[370px] w-[286px] max-xl:scale-75 max-sm:scale-[0.68] ${className}`}
     >
-      <div
-        className="absolute left-0 top-0 h-[286px] w-[286px] rounded-full"
-        style={{ backgroundColor: color }}
-      />
-      <div
-        className="absolute left-1/2 top-[198px] h-[118px] w-[118px] -translate-x-1/2 rotate-45"
-        style={{ backgroundColor: color }}
-      />
+      <svg
+        aria-hidden="true"
+        className="absolute left-0 top-0 h-[326px] w-[286px] overflow-visible"
+        fill="none"
+        viewBox="0 0 286 326"
+      >
+        <path
+          d="M143 0C64 0 0 64 0 143c0 43 16 76 48 108l95 95 95-95c32-32 48-65 48-108C286 64 222 0 143 0Z"
+          fill={color}
+        />
+      </svg>
       <div className="absolute left-0 top-0 flex h-[286px] w-[286px] flex-col items-center justify-center text-center">
         <span className="text-sm font-black">{label}</span>
         <strong className="mt-4 text-4xl font-black tracking-[-0.03em]">
@@ -676,15 +678,15 @@ function WitnessStory({
   };
 
   return (
-    <section className="relative min-h-[760px] overflow-hidden bg-[#AAF5FA] max-lg:min-h-[760px] max-md:min-h-[528px]">
+    <section className="relative min-h-[760px] overflow-hidden bg-[#AAF5FA] max-xl:min-h-[760px] max-md:min-h-[528px]">
       <MarqueeText
-        className="top-[330px] text-[154px] text-[#F5FDFF]/85 max-lg:top-[330px] max-lg:text-[118px] max-md:top-[250px] max-md:text-[72px]"
+        className="top-[344px] text-[154px] text-[#F5FDFF]/85 max-xl:top-[334px] max-xl:text-[118px] max-md:top-[250px] max-md:text-[72px]"
         text="Witness Story Witness Story"
       />
 
-      <div className="relative mx-auto h-[760px] max-w-[1440px] max-lg:h-[760px] max-md:h-[528px]">
+      <div className="relative mx-auto h-[760px] max-w-[1440px] max-xl:h-[760px] max-md:h-[528px]">
         <ArrowButton
-          className="left-[calc(50%_-_500px)] top-[420px] max-lg:left-4 max-lg:top-[420px] max-md:hidden"
+          className="left-[calc(50%_-_330px)] top-[420px] max-xl:left-[calc(50%_-_300px)] max-xl:top-[420px] max-md:hidden"
           direction="left"
           onClick={() =>
             setActiveIndex((index) =>
@@ -700,7 +702,7 @@ function WitnessStory({
           onSelectIndicator={selectIndicator}
         />
         <ArrowButton
-          className="right-[calc(50%_-_500px)] top-[420px] max-lg:right-4 max-lg:top-[420px] max-md:hidden"
+          className="right-[calc(50%_-_330px)] top-[420px] max-xl:right-[calc(50%_-_300px)] max-xl:top-[420px] max-md:hidden"
           direction="right"
           onClick={() =>
             setActiveIndex((index) => (index + 1) % activities.length)
@@ -728,9 +730,9 @@ function WitnessPhone({
     : null;
 
   return (
-    <article className="absolute left-1/2 top-20 flex h-[680px] w-[560px] -translate-x-1/2 flex-col items-center rounded-t-[40px] bg-[#161616] px-16 pt-8 text-center text-[#F5FDFF] max-lg:h-[680px] max-lg:w-[min(560px,calc(100%_-_128px))] max-lg:px-10 max-lg:pt-8 max-md:top-8 max-md:h-[496px] max-md:w-[min(360px,calc(100%_-_48px))] max-md:px-6 max-md:pt-5">
-      <div className="relative mb-5 h-16 w-full max-lg:mb-5 max-lg:h-14 max-md:mb-4 max-md:h-12">
-        <div className="absolute -left-10 -right-8 top-0 flex gap-3 max-lg:-left-6 max-lg:-right-6 max-lg:gap-2 max-md:left-0 max-md:right-0 max-md:gap-2">
+    <article className="absolute left-1/2 top-[88px] h-[672px] w-[460px] -translate-x-1/2 rounded-t-[36px] bg-[#161616] text-center text-[#F5FDFF] max-xl:h-[672px] max-xl:w-[min(460px,calc(100%_-_128px))] max-md:top-8 max-md:h-[496px] max-md:w-[min(360px,calc(100%_-_48px))]">
+      <div className="absolute left-8 right-8 top-8 h-16 max-xl:left-8 max-xl:right-8 max-md:left-5 max-md:right-5 max-md:top-5 max-md:h-12">
+        <div className="absolute inset-x-0 top-0 flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
             <button
               aria-label={`Show witness story ${index + 1}`}
@@ -744,30 +746,30 @@ function WitnessPhone({
             />
           ))}
         </div>
-        <div className="absolute -left-10 top-5 flex items-center gap-3 whitespace-nowrap text-[17px] font-black text-[#7E8593] max-lg:left-0 max-lg:top-5 max-lg:text-[13px] max-md:top-4 max-md:text-[11px]">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5FDFF] text-[#161616] max-lg:h-8 max-lg:w-8 max-md:h-7 max-md:w-7">
-            <FocusIcon className="h-7 w-7 max-lg:h-6 max-lg:w-6 max-md:h-5 max-md:w-5" />
+        <div className="absolute left-0 top-9 flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-[#7E8593] max-xl:text-[14px] max-md:top-5 max-md:gap-2 max-md:text-[11px]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5FDFF] text-[#161616] max-xl:h-8 max-xl:w-8 max-md:h-7 max-md:w-7">
+            <FocusIcon className="h-6 w-6 max-xl:h-5 max-xl:w-5 max-md:h-5 max-md:w-5" />
           </span>
           <span>{dictionary.witness}</span>
         </div>
       </div>
 
-      <time className="text-[32px] font-black max-md:text-2xl">
+      <time className="absolute inset-x-0 top-[172px] text-[28px] font-black max-md:top-[128px] max-md:text-[18px]">
         {formatActivityDate(activity.date)}
       </time>
-      <div className="mt-20 flex max-w-[420px] flex-col items-center gap-5 text-[#161616] max-lg:mt-16 max-md:mt-16 max-md:gap-4">
-        <h2 className="max-w-full bg-[#F5FDFF] px-4 py-2 text-2xl font-black leading-tight max-md:text-lg">
+      <div className="absolute left-1/2 top-[250px] flex w-[min(370px,calc(100%_-_72px))] -translate-x-1/2 flex-col items-center gap-4 text-[#161616] max-md:top-[182px] max-md:w-[min(260px,calc(100%_-_48px))] max-md:gap-4">
+        <h2 className="max-w-full bg-[#F5FDFF] px-4 py-2.5 text-[22px] font-black leading-tight max-md:px-3 max-md:py-2 max-md:text-base">
           {activity.title}
         </h2>
         {description ? (
-          <p className="max-w-full overflow-hidden bg-[#F5FDFF] px-4 py-3 text-xl font-black leading-[1.35] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] max-md:text-base">
+          <p className="max-w-full overflow-hidden bg-[#F5FDFF] px-4 py-3 text-lg font-black leading-[1.35] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] max-md:px-3 max-md:py-2 max-md:text-base">
             {description}
           </p>
         ) : null}
       </div>
 
       <a
-        className={`mx-auto mb-20 mt-auto inline-flex h-[53px] items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-lg:mb-20 max-md:mb-9 ${
+        className={`absolute bottom-[76px] left-1/2 inline-flex h-12 -translate-x-1/2 items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-md:bottom-9 max-md:h-10 max-md:px-5 max-md:text-xs ${
           activity.post_link ? "" : "pointer-events-none opacity-70"
         }`}
         href={activity.post_link ?? "#"}
@@ -792,19 +794,19 @@ function truncateDescription(description: string) {
 
 function Footer() {
   return (
-    <footer className="min-h-[480px] bg-[#00CAD7] px-20 pb-16 pt-16 text-[#161616] max-lg:min-h-0 max-lg:px-6 max-lg:py-12 max-sm:px-4">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-lg:block">
+    <footer className="min-h-[480px] bg-[#00CAD7] px-20 pb-16 pt-16 text-[#161616] max-xl:min-h-0 max-xl:px-6 max-xl:py-12 max-sm:px-4">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-xl:block">
         <div>
-          <h2 className="text-[32px] font-black tracking-[-0.02em] max-lg:text-[20px]">
+          <h2 className="text-[32px] font-black tracking-[-0.02em] max-xl:text-[20px]">
             Turtle Spot Taiwan
           </h2>
-          <p className="mt-[190px] text-xs font-black max-lg:mt-3">
+          <p className="mt-[190px] text-xs font-black max-xl:mt-3">
             © 2021 Turtle Spot Taiwan
           </p>
         </div>
 
-        <div className="pt-12 text-sm font-black leading-6 max-lg:mt-10 max-lg:pt-0 max-lg:text-left max-lg:leading-5">
-          <p className="max-lg:hidden">contact us：</p>
+        <div className="pt-12 text-sm font-black leading-6 max-xl:mt-10 max-xl:pt-0 max-xl:text-left max-xl:leading-5">
+          <p className="max-xl:hidden">contact us：</p>
           <a
             className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF]"
             href="mailto:tstservice@gmail.com"
@@ -812,7 +814,7 @@ function Footer() {
             tstservice@gmail.com
           </a>
           <a
-            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-0"
+            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-xl:mt-0"
             href="#"
           >
             Facebook
@@ -825,7 +827,7 @@ function Footer() {
           </a>
         </div>
 
-        <div className="pt-12 text-sm font-black max-lg:hidden">
+        <div className="pt-12 text-sm font-black max-xl:hidden">
           <p>sponsor：</p>
           <Image
             alt="Keep Walking Fund sponsor logo"
@@ -853,9 +855,9 @@ function ArrowButton({
 }) {
   const buttonSize =
     size === "small"
-      ? "h-12 w-12 max-md:h-10 max-md:w-10"
+      ? "h-[44px] w-[44px] max-md:h-10 max-md:w-10"
       : "h-16 w-16 max-md:h-12 max-md:w-12";
-  const iconSize = size === "small" ? "h-5 w-5" : "h-6 w-6";
+  const iconSize = size === "small" ? "h-[18px] w-[18px]" : "h-6 w-6";
 
   return (
     <button
@@ -886,7 +888,7 @@ function IconButton({
     <button
       aria-label={label}
       aria-pressed={pressed}
-      className="flex w-[56px] cursor-pointer items-center justify-center border-l border-[#363841] bg-[#161616] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-lg:w-10 max-sm:w-8"
+      className="flex w-[56px] cursor-pointer items-center justify-center border-l border-[#363841] bg-[#161616] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#2C313B] hover:shadow-[0_8px_18px_rgba(0,0,0,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#AAF5FA] max-xl:w-10 max-sm:w-8"
       onClick={onClick}
       type="button"
     >
