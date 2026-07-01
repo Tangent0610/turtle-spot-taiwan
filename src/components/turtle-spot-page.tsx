@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { formatActivityDate, type Activity } from "@/lib/activity-utils";
+import { getActivities } from "@/lib/apollo";
+import {
+  formatActivityDate,
+  sortActivitiesByDateDesc,
+  type Activity,
+} from "@/lib/activity-utils";
 
 const turtleFacts = [
   { value: "淡定哥" },
@@ -121,13 +126,28 @@ const assetPath = (path: string) => `${basePath}${path}`;
 export function TurtleSpotPage({ activities }: { activities: Activity[] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [locale, setLocale] = useState<Locale>("zh");
+  const [clientActivities, setClientActivities] = useState(activities);
   const dictionary = dictionaries[locale];
   const displayActivities =
-    activities.length > 0 ? activities : fallbackActivities;
+    clientActivities.length > 0 ? clientActivities : fallbackActivities;
 
   useEffect(() => {
     document.documentElement.lang = dictionary.code;
   }, [dictionary.code]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getActivities().then((nextActivities) => {
+      if (isMounted && nextActivities.length > 0) {
+        setClientActivities(sortActivitiesByDateDesc(nextActivities));
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#AAF5FA] text-[#161616]">
