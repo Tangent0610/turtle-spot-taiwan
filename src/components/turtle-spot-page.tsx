@@ -357,14 +357,14 @@ function HeroSection({ dictionary }: { dictionary: Dictionary }) {
         text="Information Information"
       />
 
-      <div className="absolute left-1/2 top-36 z-10 h-[394px] w-[394px] -translate-x-1/2 overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0] max-xl:top-[88px] max-xl:h-[234px] max-xl:w-[234px] max-sm:top-[120px]">
+      <div className="absolute left-1/2 top-[clamp(88px,10vw,144px)] z-10 aspect-square w-[clamp(240px,41.667vw,400px)] -translate-x-1/2 overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0] max-sm:top-[120px]">
         <Image
           alt="Sea turtle swimming over coral"
           className="object-cover"
           fill
           loading="eager"
           priority
-          sizes="(max-width: 768px) 234px, 394px"
+          sizes="(max-width: 767px) 240px, (max-width: 1279px) 320px, 400px"
           src={assetPath("/images/turtle-hero.jpg")}
         />
       </div>
@@ -376,7 +376,7 @@ function HeroSection({ dictionary }: { dictionary: Dictionary }) {
 
 function TurtleProfileCard({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative z-20 mx-auto mt-[687px] w-[922px] max-xl:mt-[430px] max-xl:w-[min(680px,calc(100%_-_80px))] max-sm:mx-0 max-sm:mt-[470px] max-sm:w-full">
+    <section className="relative z-20 mx-auto mt-[687px] w-[min(922px,calc(100vw_-_80px))] max-xl:mt-[clamp(486px,52vw,630px)] max-sm:mx-0 max-sm:mt-[470px] max-sm:w-full">
       <div className="absolute -top-[63px] left-0 flex h-[63px] w-[315px] items-center whitespace-nowrap rounded-t-2xl bg-[#E5EEF0] px-10 text-[18px] font-black max-xl:-top-14 max-xl:h-14 max-xl:w-full max-xl:px-6 max-xl:text-base">
         淡定哥&nbsp;&nbsp; #TW01HOO84
       </div>
@@ -464,8 +464,15 @@ function PhotoCarousel() {
   const previousIndex =
     (activeIndex + carouselImages.length - 1) % carouselImages.length;
   const nextIndex = (activeIndex + 1) % carouselImages.length;
+  const animationFillIndex =
+    slideAnimation?.direction === "next"
+      ? (slideAnimation.to + 1) % carouselImages.length
+      : slideAnimation?.direction === "previous"
+        ? (slideAnimation.to + carouselImages.length - 1) %
+          carouselImages.length
+        : null;
   const desktopPanelClass =
-    "left-1/2 top-[5px] h-[529px] w-[706px] max-xl:hidden";
+    "left-1/2 top-0 aspect-[706/529] w-[min(706px,calc(100vw_-_80px))] max-lg:hidden";
   const getDirection = (target: number): CarouselDirection => {
     const forward =
       (target - activeIndex + carouselImages.length) % carouselImages.length;
@@ -533,10 +540,23 @@ function PhotoCarousel() {
   );
 
   return (
-    <section className="relative overflow-hidden rounded-b-[40px] bg-[#E5EEF0] pb-20 pt-[120px] max-xl:py-20 max-md:rounded-b-[28px]">
-      <div className="relative mx-auto h-[590px] max-w-[1440px] max-xl:h-auto max-xl:px-6">
+    <section className="relative overflow-hidden rounded-b-[40px] bg-[#E5EEF0] pb-20 pt-[120px] max-lg:py-20 max-md:rounded-b-[28px]">
+      <div className="relative mx-auto h-[590px] max-w-[1440px] max-lg:h-auto max-lg:px-6">
         {slideAnimation ? (
           <>
+            {animationFillIndex !== null ? (
+              <CarouselImage
+                className={desktopPanelClass}
+                image={carouselImages[animationFillIndex]}
+                isActive={false}
+                motionClass={
+                  slideAnimation.direction === "next"
+                    ? "carousel-desktop-right"
+                    : "carousel-desktop-left"
+                }
+                sizes="706px"
+              />
+            ) : null}
             <CarouselImage
               className={desktopPanelClass}
               image={carouselImages[slideAnimation.from]}
@@ -586,7 +606,7 @@ function PhotoCarousel() {
           </>
         )}
         <CarouselImage
-          className="hidden max-xl:relative max-xl:left-auto max-xl:top-0 max-xl:mx-auto max-xl:block max-xl:h-[420px] max-xl:w-[calc(100vw_-_48px)] max-xl:max-w-[704px] max-md:aspect-[4/3] max-md:h-auto max-md:w-full"
+          className="hidden max-lg:relative max-lg:left-auto max-lg:top-0 max-lg:mx-auto max-lg:block max-lg:aspect-[688/524] max-lg:w-[calc(98.039vw_-_78.431px)] max-lg:max-w-[675px] max-md:aspect-[327/249] max-md:w-[calc(98.039vw_-_47.059px)] max-md:max-w-none"
           image={carouselImages[activeIndex]}
           isActive
           key={activeIndex}
@@ -595,7 +615,7 @@ function PhotoCarousel() {
         />
 
         <ArrowButton
-          className="left-[calc(50%_-_504px)] top-[238px] max-xl:hidden"
+          className="left-[calc(50%_-_504px)] top-[238px] max-lg:hidden"
           direction="left"
           onClick={() =>
             goToSlide(
@@ -606,7 +626,7 @@ function PhotoCarousel() {
           }
         />
         <ArrowButton
-          className="right-[calc(50%_-_504px)] top-[238px] max-xl:hidden"
+          className="right-[calc(50%_-_504px)] top-[238px] max-lg:hidden"
           direction="right"
           onClick={() =>
             goToSlide(
@@ -616,7 +636,7 @@ function PhotoCarousel() {
           }
         />
 
-        <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-3 max-xl:hidden">
+        <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 gap-3 max-lg:hidden">
           {carouselImages.map((image, dot) => (
             <button
               aria-label={`${image.alt} slide`}
@@ -633,7 +653,7 @@ function PhotoCarousel() {
           ))}
         </div>
 
-        <div className="mt-8 hidden items-center justify-center gap-7 max-xl:flex max-md:mt-9 max-md:gap-5">
+        <div className="mt-8 hidden items-center justify-center gap-7 max-lg:flex max-md:mt-9 max-md:gap-5">
           <ArrowButton
             className="!static !translate-y-0"
             direction="left"
@@ -714,18 +734,18 @@ function DiveSites({ dictionary }: { dictionary: Dictionary }) {
   return (
     <section className="relative overflow-hidden rounded-b-[40px] bg-[#161616] max-xl:rounded-b-[28px]">
       <MarqueeText
-        className="top-[345px] text-[150px] text-[#515665]/80 max-xl:top-[324px] max-xl:text-[112px] max-md:top-[364px] max-md:text-[72px]"
+        className="top-[345px] text-[150px] text-[#515665]/80 max-xl:top-[324px] max-xl:text-[112px] max-md:top-[300px] max-md:text-[72px]"
         text="Favorite Dive Sites Favorite Dive Sites"
       />
-      <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[900px]">
+      <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[620px]">
         <PinMarker
-          className="left-[12vw] top-24 max-xl:left-[120px] max-xl:top-[50px] max-sm:left-1/2 max-sm:top-[54px] max-sm:-translate-x-1/2"
+          className="left-[12vw] top-24 max-xl:left-[120px] max-xl:top-[50px] max-sm:left-1/2 max-sm:top-[-32px] max-sm:-translate-x-1/2"
           color="#AAF5FA"
           label={dictionary.favoriteDive}
           title="花瓶岩"
         />
         <PinMarker
-          className="right-[18vw] top-[374px] max-xl:right-[80px] max-xl:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[515px] max-sm:-translate-x-1/2"
+          className="right-[18vw] top-[374px] max-xl:right-[80px] max-xl:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[230px] max-sm:-translate-x-1/2"
           color="#F5FDFF"
           label={dictionary.favoriteDive}
           title="美人洞"
@@ -748,7 +768,7 @@ function PinMarker({
 }) {
   return (
     <div
-      className={`absolute h-[370px] w-[286px] max-xl:scale-75 max-sm:scale-[0.68] ${className}`}
+      className={`absolute h-[370px] w-[286px] max-xl:scale-75 max-sm:scale-[0.6] ${className}`}
     >
       <svg
         aria-hidden="true"
@@ -798,7 +818,7 @@ function WitnessStory({
 
       <div className="relative mx-auto h-[760px] max-w-[1440px] max-xl:h-[760px] max-md:h-[528px]">
         <ArrowButton
-          className="left-[calc(50%_-_330px)] top-[420px] max-xl:left-[calc(50%_-_300px)] max-xl:top-[420px] max-md:hidden"
+          className="left-[max(16px,calc(50%_-_360px))] top-[420px] max-md:hidden"
           direction="left"
           onClick={() =>
             setActiveIndex((index) =>
@@ -814,7 +834,7 @@ function WitnessStory({
           onSelectIndicator={selectIndicator}
         />
         <ArrowButton
-          className="right-[calc(50%_-_330px)] top-[420px] max-xl:right-[calc(50%_-_300px)] max-xl:top-[420px] max-md:hidden"
+          className="right-[max(16px,calc(50%_-_360px))] top-[420px] max-md:hidden"
           direction="right"
           onClick={() =>
             setActiveIndex((index) => (index + 1) % activities.length)
@@ -842,8 +862,8 @@ function WitnessPhone({
     : null;
 
   return (
-    <article className="absolute left-1/2 top-[88px] h-[672px] w-[460px] -translate-x-1/2 rounded-t-[36px] bg-[#161616] text-center text-[#F5FDFF] max-xl:h-[672px] max-xl:w-[min(460px,calc(100%_-_128px))] max-md:top-8 max-md:h-[496px] max-md:w-[min(360px,calc(100%_-_48px))]">
-      <div className="absolute left-8 right-8 top-8 h-16 max-xl:left-8 max-xl:right-8 max-md:left-5 max-md:right-5 max-md:top-5 max-md:h-12">
+    <article className="absolute left-1/2 top-20 h-[min(680px,132.3vw)] w-[min(560px,83vw)] -translate-x-1/2 rounded-t-[40px] bg-[#161616] text-center text-[#F5FDFF] max-md:top-8">
+      <div className="absolute left-[7%] right-[7%] top-[4.5%] h-16 max-md:h-12">
         <div className="absolute inset-x-0 top-0 flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
             <button
@@ -858,18 +878,18 @@ function WitnessPhone({
             />
           ))}
         </div>
-        <div className="absolute left-0 top-9 flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-[#7E8593] max-xl:text-[14px] max-md:top-5 max-md:gap-2 max-md:text-[11px]">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5FDFF] text-[#161616] max-xl:h-8 max-xl:w-8 max-md:h-7 max-md:w-7">
-            <FocusIcon className="h-6 w-6 max-xl:h-5 max-xl:w-5 max-md:h-5 max-md:w-5" />
+        <div className="absolute left-0 top-[48%] flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-[#7E8593] max-md:gap-2 max-md:text-[11px]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5FDFF] text-[#161616] max-md:h-7 max-md:w-7">
+            <FocusIcon className="h-6 w-6 max-md:h-5 max-md:w-5" />
           </span>
           <span>{dictionary.witness}</span>
         </div>
       </div>
 
-      <time className="absolute inset-x-0 top-[172px] text-[28px] font-black max-md:top-[128px] max-md:text-[18px]">
+      <time className="absolute inset-x-0 top-[25.3%] text-[28px] font-black max-md:text-[18px]">
         {formatActivityDate(activity.date)}
       </time>
-      <div className="absolute left-1/2 top-[250px] flex w-[min(370px,calc(100%_-_72px))] -translate-x-1/2 flex-col items-center gap-4 text-[#161616] max-md:top-[182px] max-md:w-[min(260px,calc(100%_-_48px))] max-md:gap-4">
+      <div className="absolute left-1/2 top-[36.8%] flex w-[min(440px,78%)] -translate-x-1/2 flex-col items-center gap-4 text-[#161616] max-md:w-[min(260px,calc(100%_-_48px))] max-md:gap-4">
         <h2 className="max-w-full bg-[#F5FDFF] px-4 py-2.5 text-[22px] font-black leading-tight max-md:px-3 max-md:py-2 max-md:text-base">
           {activity.title}
         </h2>
@@ -881,7 +901,7 @@ function WitnessPhone({
       </div>
 
       <a
-        className={`absolute bottom-[76px] left-1/2 inline-flex h-12 -translate-x-1/2 items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-md:bottom-9 max-md:h-10 max-md:px-5 max-md:text-xs ${
+        className={`absolute bottom-[12%] left-1/2 inline-flex h-12 -translate-x-1/2 items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-md:bottom-[10%] max-md:h-10 max-md:px-5 max-md:text-xs ${
           activity.post_link ? "" : "pointer-events-none opacity-70"
         }`}
         href={activity.post_link ?? "#"}
@@ -906,19 +926,19 @@ function truncateDescription(description: string) {
 
 function Footer() {
   return (
-    <footer className="min-h-[480px] bg-[#00CAD7] px-20 pb-16 pt-16 text-[#161616] max-xl:min-h-0 max-xl:px-6 max-xl:py-12 max-sm:px-4">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-xl:block">
+    <footer className="h-[420px] bg-[#00CAD7] px-20 py-14 text-[#161616] max-lg:h-[392px] max-lg:px-6 max-lg:py-10 max-sm:px-4">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-lg:block">
         <div>
-          <h2 className="text-[32px] font-black tracking-[-0.02em] max-xl:text-[20px]">
+          <h2 className="text-[32px] font-black tracking-[-0.02em] max-lg:text-[20px]">
             Turtle Spot Taiwan
           </h2>
-          <p className="mt-[190px] text-xs font-black max-xl:mt-3">
+          <p className="mt-[178px] text-xs font-black max-lg:mt-3">
             © 2021 Turtle Spot Taiwan
           </p>
         </div>
 
-        <div className="pt-12 text-sm font-black leading-6 max-xl:mt-10 max-xl:pt-0 max-xl:text-left max-xl:leading-5">
-          <p className="max-xl:hidden">contact us：</p>
+        <div className="pt-12 text-sm font-black leading-6 max-lg:mt-10 max-lg:pt-0 max-lg:text-left max-lg:leading-5">
+          <p className="max-lg:hidden">contact us：</p>
           <a
             className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF]"
             href="mailto:tstservice@gmail.com"
@@ -926,20 +946,20 @@ function Footer() {
             tstservice@gmail.com
           </a>
           <a
-            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-xl:mt-0"
+            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-3"
             href="#"
           >
             Facebook
           </a>
           <a
-            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF]"
+            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-3"
             href="#"
           >
             Instagram
           </a>
         </div>
 
-        <div className="pt-12 text-sm font-black max-xl:hidden">
+        <div className="pt-12 text-sm font-black max-lg:hidden">
           <p>sponsor：</p>
           <Image
             alt="Keep Walking Fund sponsor logo"
