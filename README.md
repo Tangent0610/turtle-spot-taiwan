@@ -26,8 +26,5 @@ content so the layout remains stable.
 
 ## GitHub Pages
 
-The repository is prepared to use `main` as the publishing branch. This Next.js
-page currently uses dynamic server rendering for the GraphQL request; before
-turning on GitHub Pages static hosting, convert the activity request to a
-client-side fetch or static export flow and then enable Pages from the GitHub
-repository settings.
+The repository deploys static output from `out/` through GitHub Actions. In the
+repository settings, set Pages source to **GitHub Actions**.

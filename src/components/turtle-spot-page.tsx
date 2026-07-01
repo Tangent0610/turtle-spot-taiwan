@@ -115,6 +115,8 @@ const carouselImages = [
 const witnessIndicatorCount = 10;
 const carouselAutoplayDelay = 5000;
 const maxDescriptionChars = 28;
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const assetPath = (path: string) => `${basePath}${path}`;
 
 export function TurtleSpotPage({ activities }: { activities: Activity[] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -203,7 +205,7 @@ function Header({
         autoPlay
         loop
         preload="auto"
-        src="/audio/ambient-loop.ogg"
+        src={assetPath("/audio/ambient-loop.ogg")}
       />
       <div
         className={`flex h-14 items-center gap-2.5 whitespace-nowrap pl-5 text-[18px] font-black tracking-[-0.01em] transition-colors max-lg:h-10 max-lg:gap-2 max-lg:text-[12px] max-sm:h-8 max-sm:pl-3 max-sm:text-[11px] ${
@@ -342,7 +344,7 @@ function HeroSection({ dictionary }: { dictionary: Dictionary }) {
           loading="eager"
           priority
           sizes="(max-width: 768px) 234px, 394px"
-          src="/images/turtle-hero.jpg"
+          src={assetPath("/images/turtle-hero.jpg")}
         />
       </div>
 
@@ -376,12 +378,12 @@ function TurtleProfileCard({ dictionary }: { dictionary: Dictionary }) {
           <ProfilePhoto
             alt="Left turtle face"
             label={dictionary.leftFace}
-            src="/images/turtle-left.jpg"
+            src={assetPath("/images/turtle-left.jpg")}
           />
           <ProfilePhoto
             alt="Right turtle face"
             label={dictionary.rightFace}
-            src="/images/turtle-right.jpg"
+            src={assetPath("/images/turtle-right.jpg")}
           />
         </div>
       </div>
@@ -571,7 +573,7 @@ function CarouselImage({
         loading="eager"
         quality={95}
         sizes={sizes}
-        src={image.src}
+        src={assetPath(image.src)}
       />
     </div>
   );
@@ -809,7 +811,7 @@ function Footer() {
             alt="Keep Walking Fund sponsor logo"
             className="mt-3 h-auto w-[136px]"
             height={122}
-            src="/images/sponsor-logo.png"
+            src={assetPath("/images/sponsor-logo.png")}
             width={136}
           />
         </div>
