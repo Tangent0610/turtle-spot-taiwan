@@ -38,3 +38,96 @@ a {
   animation: marquee-left 34s linear infinite;
   will-change: transform;
 }
+
+.carousel-desktop-left {
+  opacity: 0.45;
+  transform: translateX(calc(-50% - 920px)) scale(0.95);
+}
+
+.carousel-desktop-center {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.02);
+}
+
+.carousel-desktop-right {
+  opacity: 0.45;
+  transform: translateX(calc(-50% + 920px)) scale(0.95);
+}
+
+@keyframes carousel-left-to-center {
+  from {
+    opacity: 0.45;
+    transform: translateX(calc(-50% - 920px)) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.02);
+  }
+}
+
+@keyframes carousel-right-to-center {
+  from {
+    opacity: 0.45;
+    transform: translateX(calc(-50% + 920px)) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.02);
+  }
+}
+
+@keyframes carousel-center-to-left {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.02);
+  }
+
+  to {
+    opacity: 0.45;
+    transform: translateX(calc(-50% - 920px)) scale(0.95);
+  }
+}
+
+@keyframes carousel-center-to-right {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.02);
+  }
+
+  to {
+    opacity: 0.45;
+    transform: translateX(calc(-50% + 920px)) scale(0.95);
+  }
+}
+
+@keyframes carousel-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-carousel-left-to-center {
+  animation: carousel-left-to-center 650ms ease both;
+}
+
+.animate-carousel-right-to-center {
+  animation: carousel-right-to-center 650ms ease both;
+}
+
+.animate-carousel-center-to-left {
+  animation: carousel-center-to-left 650ms ease both;
+}
+
+.animate-carousel-center-to-right {
+  animation: carousel-center-to-right 650ms ease both;
+}
+
+.animate-carousel-fade {
+  animation: carousel-fade 450ms ease both;
+}

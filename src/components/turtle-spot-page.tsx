@@ -119,7 +119,9 @@ const carouselImages = [
 
 const witnessIndicatorCount = 10;
 const carouselAutoplayDelay = 5000;
+const carouselAnimationDuration = 650;
 const maxDescriptionChars = 28;
+type CarouselDirection = "next" | "previous";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const assetPath = (path: string) => `${basePath}${path}`;
 
@@ -453,44 +455,143 @@ function MarqueeText({ className, text }: { className: string; text: string }) {
 function PhotoCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoplaySeed, setAutoplaySeed] = useState(0);
+  const [slideAnimation, setSlideAnimation] = useState<{
+    direction: CarouselDirection;
+    from: number;
+    to: number;
+  } | null>(null);
+  const animationTimeoutRef = useRef<number | null>(null);
   const previousIndex =
     (activeIndex + carouselImages.length - 1) % carouselImages.length;
   const nextIndex = (activeIndex + 1) % carouselImages.length;
-  const goToSlide = (next: number | ((index: number) => number)) => {
-    setActiveIndex((index) =>
-      typeof next === "function" ? next(index) : next,
-    );
+  const desktopPanelClass =
+    "left-1/2 top-[5px] h-[529px] w-[706px] max-xl:hidden";
+  const getDirection = (target: number): CarouselDirection => {
+    const forward =
+      (target - activeIndex + carouselImages.length) % carouselImages.length;
+    const backward =
+      (activeIndex - target + carouselImages.length) % carouselImages.length;
+
+    return backward < forward ? "previous" : "next";
+  };
+  const goToSlide = (
+    next: number | ((index: number) => number),
+    direction?: CarouselDirection,
+  ) => {
+    const target =
+      ((typeof next === "function" ? next(activeIndex) : next) +
+        carouselImages.length) %
+      carouselImages.length;
+
+    if (target === activeIndex) {
+      return;
+    }
+
+    if (animationTimeoutRef.current !== null) {
+      window.clearTimeout(animationTimeoutRef.current);
+    }
+
+    setSlideAnimation({
+      direction: direction ?? getDirection(target),
+      from: activeIndex,
+      to: target,
+    });
+    setActiveIndex(target);
     setAutoplaySeed((seed) => seed + 1);
+    animationTimeoutRef.current = window.setTimeout(() => {
+      setSlideAnimation(null);
+      animationTimeoutRef.current = null;
+    }, carouselAnimationDuration);
   };
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      setActiveIndex((index) => (index + 1) % carouselImages.length);
+      const target = (activeIndex + 1) % carouselImages.length;
+
+      if (animationTimeoutRef.current !== null) {
+        window.clearTimeout(animationTimeoutRef.current);
+      }
+
+      setSlideAnimation({ direction: "next", from: activeIndex, to: target });
+      setActiveIndex(target);
+      animationTimeoutRef.current = window.setTimeout(() => {
+        setSlideAnimation(null);
+        animationTimeoutRef.current = null;
+      }, carouselAnimationDuration);
     }, carouselAutoplayDelay);
 
     return () => window.clearTimeout(timeout);
   }, [autoplaySeed, activeIndex]);
 
+  useEffect(
+    () => () => {
+      if (animationTimeoutRef.current !== null) {
+        window.clearTimeout(animationTimeoutRef.current);
+      }
+    },
+    [],
+  );
+
   return (
     <section className="relative overflow-hidden rounded-b-[40px] bg-[#E5EEF0] pb-20 pt-[120px] max-xl:py-20 max-md:rounded-b-[28px]">
       <div className="relative mx-auto h-[590px] max-w-[1440px] max-xl:h-auto max-xl:px-6">
+        {slideAnimation ? (
+          <>
+            <CarouselImage
+              className={desktopPanelClass}
+              image={carouselImages[slideAnimation.from]}
+              isActive
+              motionClass={
+                slideAnimation.direction === "next"
+                  ? "animate-carousel-center-to-left"
+                  : "animate-carousel-center-to-right"
+              }
+              sizes="706px"
+            />
+            <CarouselImage
+              className={desktopPanelClass}
+              image={carouselImages[slideAnimation.to]}
+              isActive
+              motionClass={
+                slideAnimation.direction === "next"
+                  ? "animate-carousel-right-to-center"
+                  : "animate-carousel-left-to-center"
+              }
+              sizes="706px"
+            />
+          </>
+        ) : (
+          <>
+            <CarouselImage
+              className={desktopPanelClass}
+              image={carouselImages[previousIndex]}
+              isActive={false}
+              motionClass="carousel-desktop-left"
+              sizes="706px"
+            />
+            <CarouselImage
+              className={desktopPanelClass}
+              image={carouselImages[activeIndex]}
+              isActive
+              motionClass="carousel-desktop-center"
+              sizes="706px"
+            />
+            <CarouselImage
+              className={desktopPanelClass}
+              image={carouselImages[nextIndex]}
+              isActive={false}
+              motionClass="carousel-desktop-right"
+              sizes="706px"
+            />
+          </>
+        )}
         <CarouselImage
-          className="left-[calc(50%_-_1272px)] top-2 h-[529px] w-[706px] max-xl:hidden"
-          image={carouselImages[previousIndex]}
-          isActive={false}
-          sizes="706px"
-        />
-        <CarouselImage
-          className="left-1/2 top-[5px] h-[529px] w-[706px] -translate-x-1/2 max-xl:relative max-xl:left-auto max-xl:top-0 max-xl:mx-auto max-xl:h-[420px] max-xl:w-[calc(100vw_-_48px)] max-xl:max-w-[704px] max-xl:translate-x-0 max-md:aspect-[4/3] max-md:h-auto max-md:w-full"
+          className="hidden max-xl:relative max-xl:left-auto max-xl:top-0 max-xl:mx-auto max-xl:block max-xl:h-[420px] max-xl:w-[calc(100vw_-_48px)] max-xl:max-w-[704px] max-md:aspect-[4/3] max-md:h-auto max-md:w-full"
           image={carouselImages[activeIndex]}
           isActive
+          key={activeIndex}
+          motionClass="scale-[1.02] opacity-100 animate-carousel-fade"
           sizes="(max-width: 1279px) calc(100vw - 48px), 706px"
-        />
-        <CarouselImage
-          className="left-[calc(50%_+_567px)] top-2 h-[529px] w-[706px] max-xl:hidden"
-          image={carouselImages[nextIndex]}
-          isActive={false}
-          sizes="706px"
         />
 
         <ArrowButton
@@ -500,6 +601,7 @@ function PhotoCarousel() {
             goToSlide(
               (index) =>
                 (index + carouselImages.length - 1) % carouselImages.length,
+              "previous",
             )
           }
         />
@@ -507,7 +609,10 @@ function PhotoCarousel() {
           className="right-[calc(50%_-_504px)] top-[238px] max-xl:hidden"
           direction="right"
           onClick={() =>
-            goToSlide((index) => (index + 1) % carouselImages.length)
+            goToSlide(
+              (index) => (index + 1) % carouselImages.length,
+              "next",
+            )
           }
         />
 
@@ -536,6 +641,7 @@ function PhotoCarousel() {
               goToSlide(
                 (index) =>
                   (index + carouselImages.length - 1) % carouselImages.length,
+                "previous",
               )
             }
           />
@@ -559,7 +665,10 @@ function PhotoCarousel() {
             className="!static !translate-y-0"
             direction="right"
             onClick={() =>
-              goToSlide((index) => (index + 1) % carouselImages.length)
+              goToSlide(
+                (index) => (index + 1) % carouselImages.length,
+                "next",
+              )
             }
           />
         </div>
@@ -572,17 +681,20 @@ function CarouselImage({
   className,
   image,
   isActive,
+  motionClass,
   sizes,
 }: {
   className: string;
   image: (typeof carouselImages)[number];
   isActive: boolean;
+  motionClass?: string;
   sizes: string;
 }) {
   return (
     <div
       className={`absolute overflow-hidden rounded-2xl bg-[#AAF5FA] transition-[opacity,transform] duration-700 ease-out ${
-        isActive ? "scale-[1.02] opacity-100" : "scale-95 opacity-45"
+        motionClass ??
+        (isActive ? "scale-[1.02] opacity-100" : "scale-95 opacity-45")
       } ${className}`}
     >
       <Image
