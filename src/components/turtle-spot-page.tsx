@@ -351,13 +351,13 @@ function MenuOverlay({
 
 function HeroSection({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative min-h-[1424px] overflow-hidden bg-[#AAF5FA] max-xl:min-h-[1180px] max-sm:min-h-[1580px]">
+    <section className="relative overflow-hidden bg-[#AAF5FA] pb-0 pt-36 max-xl:pb-[21px] max-xl:pt-[88px] max-sm:pb-0 max-sm:pt-[120px]">
       <MarqueeText
         className="top-[236px] text-[190px] text-[#F5FDFF]/80 max-xl:top-[161px] max-xl:text-[88px] max-sm:top-[190px]"
         text="Information Information"
       />
 
-      <div className="absolute left-1/2 top-[clamp(88px,10vw,144px)] z-10 aspect-square w-[clamp(240px,41.667vw,400px)] -translate-x-1/2 overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0] max-sm:top-[120px]">
+      <div className="relative z-10 mx-auto aspect-square w-[clamp(240px,41.667vw,400px)] overflow-hidden rounded-full border-[6px] border-[#F5FDFF] bg-[#E5EEF0]">
         <Image
           alt="Sea turtle swimming over coral"
           className="object-cover"
@@ -376,7 +376,7 @@ function HeroSection({ dictionary }: { dictionary: Dictionary }) {
 
 function TurtleProfileCard({ dictionary }: { dictionary: Dictionary }) {
   return (
-    <section className="relative z-20 mx-auto mt-[687px] w-[min(922px,calc(100vw_-_80px))] max-xl:mt-[clamp(486px,52vw,630px)] max-sm:mx-0 max-sm:mt-[470px] max-sm:w-full">
+    <section className="relative z-20 mx-auto mt-[143px] w-[min(922px,calc(100vw_-_80px))] max-xl:mt-28 max-sm:mx-0 max-sm:mt-[110px] max-sm:w-full">
       <div className="absolute -top-[63px] left-0 flex h-[63px] w-[315px] items-center whitespace-nowrap rounded-t-2xl bg-[#E5EEF0] px-10 text-[18px] font-black max-xl:-top-14 max-xl:h-14 max-xl:w-full max-xl:px-6 max-xl:text-base">
         淡定哥&nbsp;&nbsp; #TW01HOO84
       </div>
@@ -551,12 +551,30 @@ function PhotoCarousel() {
                 isActive={false}
                 motionClass={
                   slideAnimation.direction === "next"
-                    ? "carousel-desktop-right"
-                    : "carousel-desktop-left"
+                    ? "animate-carousel-far-right-to-right"
+                    : "animate-carousel-far-left-to-left"
                 }
                 sizes="706px"
               />
             ) : null}
+            <CarouselImage
+              className={desktopPanelClass}
+              image={
+                carouselImages[
+                  slideAnimation.direction === "next"
+                    ? (slideAnimation.from + carouselImages.length - 1) %
+                        carouselImages.length
+                    : (slideAnimation.from + 1) % carouselImages.length
+                ]
+              }
+              isActive={false}
+              motionClass={
+                slideAnimation.direction === "next"
+                  ? "animate-carousel-left-to-far-left"
+                  : "animate-carousel-right-to-far-right"
+              }
+              sizes="706px"
+            />
             <CarouselImage
               className={desktopPanelClass}
               image={carouselImages[slideAnimation.from]}
@@ -737,7 +755,7 @@ function DiveSites({ dictionary }: { dictionary: Dictionary }) {
         className="top-[345px] text-[150px] text-[#515665]/80 max-xl:top-[324px] max-xl:text-[112px] max-md:top-[300px] max-md:text-[72px]"
         text="Favorite Dive Sites Favorite Dive Sites"
       />
-      <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[620px]">
+      <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[650px]">
         <PinMarker
           className="left-[12vw] top-24 max-xl:left-[120px] max-xl:top-[50px] max-sm:left-1/2 max-sm:top-[-32px] max-sm:-translate-x-1/2"
           color="#AAF5FA"
@@ -745,7 +763,7 @@ function DiveSites({ dictionary }: { dictionary: Dictionary }) {
           title="花瓶岩"
         />
         <PinMarker
-          className="right-[18vw] top-[374px] max-xl:right-[80px] max-xl:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[230px] max-sm:-translate-x-1/2"
+          className="right-[18vw] top-[374px] max-xl:right-[80px] max-xl:top-[340px] max-sm:left-1/2 max-sm:right-auto max-sm:top-[260px] max-sm:-translate-x-1/2"
           color="#F5FDFF"
           label={dictionary.favoriteDive}
           title="美人洞"
@@ -810,13 +828,13 @@ function WitnessStory({
   };
 
   return (
-    <section className="relative min-h-[760px] overflow-hidden bg-[#AAF5FA] max-xl:min-h-[760px] max-md:min-h-[528px]">
+    <section className="relative overflow-hidden bg-[#AAF5FA]">
       <MarqueeText
         className="top-[344px] text-[154px] text-[#F5FDFF]/85 max-xl:top-[334px] max-xl:text-[118px] max-md:top-[250px] max-md:text-[72px]"
         text="Witness Story Witness Story"
       />
 
-      <div className="relative mx-auto h-[760px] max-w-[1440px] max-xl:h-[760px] max-md:h-[528px]">
+      <div className="relative mx-auto flex max-w-[1440px] justify-center pt-20 max-md:pt-8">
         <ArrowButton
           className="left-[max(16px,calc(50%_-_360px))] top-[420px] max-md:hidden"
           direction="left"
@@ -862,9 +880,9 @@ function WitnessPhone({
     : null;
 
   return (
-    <article className="absolute left-1/2 top-20 h-[min(680px,132.3vw)] w-[min(560px,83vw)] -translate-x-1/2 rounded-t-[40px] bg-[#161616] text-center text-[#F5FDFF] max-md:top-8">
-      <div className="absolute left-[7%] right-[7%] top-[4.5%] h-16 max-md:h-12">
-        <div className="absolute inset-x-0 top-0 flex gap-3 max-xl:gap-2 max-md:gap-2">
+    <article className="flex h-[min(680px,132.3vw)] w-[min(560px,83vw)] flex-col rounded-t-[40px] bg-[#161616] px-[5.5%] pt-[4.5%] text-center text-[#F5FDFF]">
+      <div>
+        <div className="flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
             <button
               aria-label={`Show witness story ${index + 1}`}
@@ -878,7 +896,7 @@ function WitnessPhone({
             />
           ))}
         </div>
-        <div className="absolute left-0 top-[48%] flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-[#7E8593] max-md:gap-2 max-md:text-[11px]">
+        <div className="mt-7 flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-[#7E8593] max-md:mt-4 max-md:gap-2 max-md:text-[11px]">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5FDFF] text-[#161616] max-md:h-7 max-md:w-7">
             <FocusIcon className="h-6 w-6 max-md:h-5 max-md:w-5" />
           </span>
@@ -886,10 +904,10 @@ function WitnessPhone({
         </div>
       </div>
 
-      <time className="absolute inset-x-0 top-[25.3%] text-[28px] font-black max-md:text-[18px]">
+      <time className="mt-[13%] text-[28px] font-black max-md:mt-[12%] max-md:text-[18px]">
         {formatActivityDate(activity.date)}
       </time>
-      <div className="absolute left-1/2 top-[36.8%] flex w-[min(440px,78%)] -translate-x-1/2 flex-col items-center gap-4 text-[#161616] max-md:w-[min(260px,calc(100%_-_48px))] max-md:gap-4">
+      <div className="mx-auto mt-[8%] flex w-[min(440px,100%)] flex-col items-center gap-4 text-[#161616] max-md:w-[min(260px,100%)] max-md:gap-4">
         <h2 className="max-w-full bg-[#F5FDFF] px-4 py-2.5 text-[22px] font-black leading-tight max-md:px-3 max-md:py-2 max-md:text-base">
           {activity.title}
         </h2>
@@ -901,7 +919,7 @@ function WitnessPhone({
       </div>
 
       <a
-        className={`absolute bottom-[12%] left-1/2 inline-flex h-12 -translate-x-1/2 items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-md:bottom-[10%] max-md:h-10 max-md:px-5 max-md:text-xs ${
+        className={`mx-auto mb-[12%] mt-auto inline-flex h-12 items-center justify-center rounded-full bg-[#AAF5FA] px-8 text-sm font-black text-[#161616] transition-colors hover:bg-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5FDFF] max-md:mb-[10%] max-md:h-10 max-md:px-5 max-md:text-xs ${
           activity.post_link ? "" : "pointer-events-none opacity-70"
         }`}
         href={activity.post_link ?? "#"}
@@ -926,18 +944,18 @@ function truncateDescription(description: string) {
 
 function Footer() {
   return (
-    <footer className="h-[420px] bg-[#00CAD7] px-20 py-14 text-[#161616] max-lg:h-[392px] max-lg:px-6 max-lg:py-10 max-sm:px-4">
+    <footer className="h-[420px] overflow-hidden bg-[#00CAD7] px-20 py-14 text-[#161616] max-lg:h-[392px] max-lg:px-6 max-lg:py-9 max-sm:px-4">
       <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-lg:block">
         <div>
-          <h2 className="text-[32px] font-black tracking-[-0.02em] max-lg:text-[20px]">
+          <h2 className="text-[32px] font-black tracking-[-0.02em] max-lg:text-2xl">
             Turtle Spot Taiwan
           </h2>
-          <p className="mt-[178px] text-xs font-black max-lg:mt-3">
+          <p className="mt-[178px] text-xs font-black max-lg:mt-4 max-lg:text-sm">
             © 2021 Turtle Spot Taiwan
           </p>
         </div>
 
-        <div className="pt-12 text-sm font-black leading-6 max-lg:mt-10 max-lg:pt-0 max-lg:text-left max-lg:leading-5">
+        <div className="pt-12 text-sm font-black leading-6 max-lg:mt-12 max-lg:pt-0 max-lg:text-left max-lg:text-lg max-lg:leading-7">
           <p className="max-lg:hidden">contact us：</p>
           <a
             className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF]"
@@ -946,13 +964,13 @@ function Footer() {
             tstservice@gmail.com
           </a>
           <a
-            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-3"
+            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-2"
             href="#"
           >
             Facebook
           </a>
           <a
-            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-3"
+            className="block transition-colors hover:text-[#F5FDFF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5FDFF] max-lg:mt-2"
             href="#"
           >
             Instagram

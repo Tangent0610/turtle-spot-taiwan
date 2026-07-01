@@ -54,6 +54,16 @@ a {
   transform: translateX(calc(-50% + 920px)) scale(0.95);
 }
 
+.carousel-desktop-far-left {
+  opacity: 0;
+  transform: translateX(calc(-50% - 1380px)) scale(0.95);
+}
+
+.carousel-desktop-far-right {
+  opacity: 0;
+  transform: translateX(calc(-50% + 1380px)) scale(0.95);
+}
+
 @keyframes carousel-left-to-center {
   from {
     opacity: 0.45;
@@ -102,6 +112,54 @@ a {
   }
 }
 
+@keyframes carousel-left-to-far-left {
+  from {
+    opacity: 0.45;
+    transform: translateX(calc(-50% - 920px)) scale(0.95);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(calc(-50% - 1380px)) scale(0.95);
+  }
+}
+
+@keyframes carousel-right-to-far-right {
+  from {
+    opacity: 0.45;
+    transform: translateX(calc(-50% + 920px)) scale(0.95);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(calc(-50% + 1380px)) scale(0.95);
+  }
+}
+
+@keyframes carousel-far-right-to-right {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-50% + 1380px)) scale(0.95);
+  }
+
+  to {
+    opacity: 0.45;
+    transform: translateX(calc(-50% + 920px)) scale(0.95);
+  }
+}
+
+@keyframes carousel-far-left-to-left {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-50% - 1380px)) scale(0.95);
+  }
+
+  to {
+    opacity: 0.45;
+    transform: translateX(calc(-50% - 920px)) scale(0.95);
+  }
+}
+
 @keyframes carousel-fade {
   from {
     opacity: 0;
@@ -126,6 +184,22 @@ a {
 
 .animate-carousel-center-to-right {
   animation: carousel-center-to-right 650ms ease both;
+}
+
+.animate-carousel-left-to-far-left {
+  animation: carousel-left-to-far-left 650ms ease both;
+}
+
+.animate-carousel-right-to-far-right {
+  animation: carousel-right-to-far-right 650ms ease both;
+}
+
+.animate-carousel-far-right-to-right {
+  animation: carousel-far-right-to-right 650ms ease both;
+}
+
+.animate-carousel-far-left-to-left {
+  animation: carousel-far-left-to-left 650ms ease both;
 }
 
 .animate-carousel-fade {
