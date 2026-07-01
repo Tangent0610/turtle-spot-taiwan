@@ -1,0 +1,7 @@
+.next
+node_modules
+.design
+.design-assets
+.design-src
+pnpm-lock.yaml
+public/images
