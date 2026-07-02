@@ -8,6 +8,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-turtle-aqua: #aaf5fa;
+  --color-turtle-cyan: #00cad7;
+  --color-turtle-divider: #363841;
+  --color-turtle-hover: #2c313b;
+  --color-turtle-ink: #161616;
+  --color-turtle-marquee: #515665;
+  --color-turtle-menu-muted: #bfc8ca;
+  --color-turtle-muted: #7e8593;
+  --color-turtle-panel: #e5eef0;
+  --color-turtle-white: #f5fdff;
   --font-sans:
     "Noto Sans TC", Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;

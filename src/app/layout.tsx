@@ -6,14 +6,16 @@ export const metadata: Metadata = {
   description: "Turtle sighting and dive site information in Taiwan.",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="zh-Hant" className="h-full antialiased">
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;

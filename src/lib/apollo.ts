@@ -20,17 +20,16 @@ type ActivitiesQuery = {
   activities: Activity[];
 };
 
-function createApolloClient() {
-  return new ApolloClient({
+const createApolloClient = () =>
+  new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
       uri: GRAPHQL_ENDPOINT,
       fetchOptions: { cache: "no-store" },
     }),
   });
-}
 
-export async function getActivities() {
+export const getActivities = async () => {
   try {
     const { data } = await createApolloClient().query<ActivitiesQuery>({
       query: ACTIVITIES_QUERY,
@@ -41,4 +40,4 @@ export async function getActivities() {
   } catch {
     return [];
   }
-}
+};

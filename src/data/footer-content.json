@@ -1,0 +1,23 @@
+{
+  "siteName": "Turtle Spot Taiwan",
+  "copyright": "© 2021 Turtle Spot Taiwan",
+  "contactLabel": "contact us：",
+  "sponsorLabel": "sponsor：",
+  "links": [
+    {
+      "label": "tstservice@gmail.com",
+      "href": "mailto:tstservice@gmail.com"
+    },
+    {
+      "label": "Facebook",
+      "href": "https://simpleinfo.cc/"
+    },
+    {
+      "label": "Instagram",
+      "href": "https://simpleinfo.cc/"
+    }
+  ],
+  "sponsor": {
+    "alt": "Keep Walking Fund sponsor logo"
+  }
+}

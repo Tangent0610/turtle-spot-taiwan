@@ -5,13 +5,10 @@ export type Activity = {
   date: string;
 };
 
-export function formatActivityDate(date: string) {
-  return date.replaceAll("-", "/");
-}
+export const formatActivityDate = (date: string) => date.replaceAll("-", "/");
 
-export function sortActivitiesByDateDesc(activities: readonly Activity[]) {
-  return [...activities].sort(
+export const sortActivitiesByDateDesc = (activities: readonly Activity[]) =>
+  [...activities].sort(
     (left, right) =>
       new Date(right.date).getTime() - new Date(left.date).getTime(),
   );
-}
