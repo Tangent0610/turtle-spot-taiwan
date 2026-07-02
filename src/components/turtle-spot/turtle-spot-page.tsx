@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { fallbackActivities } from "@/data/fallback-activities";
-import { dictionaries, type Locale } from "@/i18n/dictionaries";
+import {
+  defaultLocale,
+  dictionaries,
+  getNextLocale,
+  type Locale,
+} from "@/i18n/dictionaries";
 import { getActivities } from "@/lib/apollo";
 import { sortActivitiesByDateDesc, type Activity } from "@/lib/activity-utils";
 import { LocaleProvider } from "@/components/turtle-spot/locale-context";
@@ -16,7 +21,7 @@ import { WitnessStory } from "@/components/turtle-spot/sections/witness-story";
 
 export const TurtleSpotPage = ({ activities }: { activities: Activity[] }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [locale, setLocale] = useState<Locale>("zh");
+  const [locale, setLocale] = useState<Locale>(defaultLocale);
   const [clientActivities, setClientActivities] = useState(activities);
   const dictionary = dictionaries[locale];
   const displayActivities =
@@ -45,9 +50,7 @@ export const TurtleSpotPage = ({ activities }: { activities: Activity[] }) => {
       <main className="min-h-screen overflow-hidden bg-turtle-aqua text-turtle-ink">
         <Header
           isMenuOpen={isMenuOpen}
-          onLocaleToggle={() =>
-            setLocale((current) => (current === "zh" ? "en" : "zh"))
-          }
+          onLocaleToggle={() => setLocale(getNextLocale)}
           onMenuToggle={() => setIsMenuOpen((open) => !open)}
         />
         <MenuOverlay isOpen={isMenuOpen} />

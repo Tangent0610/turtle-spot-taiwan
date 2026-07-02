@@ -61,9 +61,21 @@ export const MenuOverlay = ({ isOpen }: { isOpen: boolean }) => {
               <p className="text-2xl font-black text-turtle-menu-muted max-lg:text-lg">
                 {dictionary.menuFollow}
               </p>
-              <p className="mt-6 whitespace-nowrap text-4xl font-black tracking-[-0.02em] max-lg:mt-3 max-lg:text-2xl">
-                facebook / instagram
-              </p>
+              <div className="mt-6 flex whitespace-nowrap text-4xl font-black tracking-[-0.02em] max-lg:mt-3 max-lg:text-2xl">
+                <a
+                  className="transition-colors hover:text-turtle-aqua focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-turtle-aqua"
+                  href={fallbackLink}
+                >
+                  facebook
+                </a>
+                <span className="px-2">/</span>
+                <a
+                  className="transition-colors hover:text-turtle-aqua focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-turtle-aqua"
+                  href={fallbackLink}
+                >
+                  instagram
+                </a>
+              </div>
             </div>
           </div>
         </div>

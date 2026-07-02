@@ -55,7 +55,7 @@ export const WitnessStory = ({ activities }: { activities: Activity[] }) => {
     <section className="relative overflow-hidden bg-turtle-aqua">
       <MarqueeText
         className="top-[344px] text-[154px] text-turtle-white/85 max-xl:top-[334px] max-xl:text-[118px] max-md:top-[250px] max-md:text-[72px]"
-        text="Witness Story Witness Story"
+        text={"Witness Story\u00a0\u00a0\u00a0\u00a0Witness Story"}
       />
 
       <div

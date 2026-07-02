@@ -31,7 +31,7 @@ export const WitnessPhone = ({
     : null;
 
   return (
-    <article className="flex h-[min(680px,132.3vw)] w-[min(560px,83vw)] flex-col rounded-t-[40px] bg-turtle-ink px-6 pt-5 text-center text-turtle-white max-xl:px-[5.5%] max-xl:pt-[4.5%]">
+    <article className="flex h-[496px] w-[311px] max-w-[88vw] flex-col rounded-t-[40px] bg-turtle-ink px-3 pt-5 text-center text-turtle-white sm:h-[680px] sm:w-[560px] sm:max-w-none sm:px-6 sm:pt-6 lg:px-4">
       <div>
         <div className="flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
@@ -57,7 +57,7 @@ export const WitnessPhone = ({
         </div>
       </div>
 
-      <time className="mt-[13%] text-[28px] font-black max-md:mt-[12%] max-md:text-[18px]">
+      <time className="mt-[10%] text-[28px] font-black max-md:mt-[12%] max-md:text-[18px]">
         {formatActivityDate(activity.date)}
       </time>
       <div className="mx-auto mt-[8%] flex w-[min(440px,100%)] flex-col items-center gap-4 text-turtle-ink max-md:w-[min(260px,100%)] max-md:gap-4">

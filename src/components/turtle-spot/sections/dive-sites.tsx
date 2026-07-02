@@ -15,7 +15,7 @@ export const DiveSites = () => {
     >
       <MarqueeText
         className="top-[345px] text-[150px] text-turtle-marquee/80 max-xl:top-[324px] max-xl:text-[112px] max-md:top-[300px] max-md:text-[72px]"
-        text="Favorite Dive Sites Favorite Dive Sites"
+        text={"Favorite Dive Sites\u00a0\u00a0\u00a0\u00a0Favorite Dive Sites"}
       />
       <div className="relative z-10 min-h-[840px] max-xl:min-h-[760px] max-sm:min-h-[650px]">
         {diveSites.map((site) => (

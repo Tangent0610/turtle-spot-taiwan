@@ -1,3 +1,10 @@
+export const locales = ["zh", "en"] as const;
+export type Locale = (typeof locales)[number];
+export const defaultLocale: Locale = "zh";
+
+export const getNextLocale = (current: Locale) =>
+  locales[(locales.indexOf(current) + 1) % locales.length] ?? defaultLocale;
+
 export const dictionaries = {
   zh: {
     code: "zh-Hant",
@@ -55,7 +62,6 @@ export const dictionaries = {
     favoriteDive: "Favorite dive site",
     witness: "Witness story",
   },
-} as const;
+} as const satisfies Record<Locale, Record<string, unknown>>;
 
-export type Locale = keyof typeof dictionaries;
 export type Dictionary = (typeof dictionaries)[Locale];
