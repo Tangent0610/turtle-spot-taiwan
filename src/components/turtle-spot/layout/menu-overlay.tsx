@@ -18,8 +18,8 @@ export const MenuOverlay = ({ isOpen }: { isOpen: boolean }) => {
       }`}
     >
       <div className="overflow-hidden rounded-b-[40px] bg-turtle-ink text-turtle-white max-lg:rounded-b-[28px]">
-        <div className="mx-auto flex min-h-[560px] max-w-[1440px] flex-col px-20 pb-24 pt-44 max-lg:min-h-screen max-lg:px-10 max-lg:pb-16 max-lg:pt-28 max-sm:px-6">
-          <nav className="grid w-full grid-cols-5 items-start gap-8 max-lg:grid-cols-1 max-lg:gap-7">
+        <div className="mx-auto flex min-h-[560px] w-full flex-col px-16 pb-24 pt-44 max-lg:min-h-screen max-lg:px-10 max-lg:pb-16 max-lg:pt-28 max-sm:px-6">
+          <nav className="grid w-full grid-cols-5 items-start gap-7 max-lg:grid-cols-1 max-lg:gap-7">
             {navItems.map((item, index) => (
               <a
                 className="group block min-w-0 transition-transform hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-turtle-aqua max-lg:hover:translate-x-1 max-lg:hover:translate-y-0"
@@ -36,7 +36,13 @@ export const MenuOverlay = ({ isOpen }: { isOpen: boolean }) => {
                 <span
                   className={`mt-3 block whitespace-nowrap font-black leading-none tracking-[-0.01em] transition-colors group-hover:text-turtle-aqua max-lg:hidden ${
                     item.active ? "text-turtle-aqua" : "text-turtle-white"
-                  } ${compactMenu ? "text-[clamp(30px,2.8vw,40px)]" : "text-[clamp(30px,3.2vw,48px)]"}`}
+                  } ${
+                    compactMenu
+                      ? "text-[clamp(28px,2.4vw,40px)]"
+                      : item.title === "Report Sightings"
+                        ? "text-[clamp(26px,2.2vw,40px)]"
+                        : "text-[clamp(28px,2.6vw,48px)]"
+                  }`}
                 >
                   {item.title}
                 </span>
