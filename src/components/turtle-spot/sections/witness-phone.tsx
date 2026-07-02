@@ -31,7 +31,7 @@ export const WitnessPhone = ({
     : null;
 
   return (
-    <article className="flex h-[496px] w-[311px] max-w-[88vw] flex-col rounded-t-[40px] bg-turtle-ink px-3 pt-6 text-center text-turtle-white sm:h-[680px] sm:w-[560px] sm:max-w-none sm:px-6 sm:pt-7 lg:px-4">
+    <article className="flex h-[496px] w-[311px] max-w-[88vw] flex-col rounded-t-[40px] bg-turtle-ink px-3 pt-7 text-center text-turtle-white sm:h-[680px] sm:w-[560px] sm:max-w-none sm:px-6 sm:pt-8 lg:px-4">
       <div>
         <div className="flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
