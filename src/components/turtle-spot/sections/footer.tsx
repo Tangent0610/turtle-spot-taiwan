@@ -4,13 +4,13 @@ import { assetPath, imageAssets } from "@/config/assets";
 import { footerLinkClass } from "@/components/turtle-spot/styles";
 
 export const Footer = () => (
-  <footer className="h-[420px] overflow-hidden bg-turtle-cyan px-20 py-14 text-turtle-ink max-lg:h-[392px] max-lg:px-6 max-lg:pb-6 max-lg:pt-14 max-sm:px-4 max-sm:pt-12">
-    <div className="mx-auto grid max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-lg:block">
-      <div>
+  <footer className="h-[420px] overflow-hidden bg-turtle-cyan px-20 pb-8 pt-14 text-turtle-ink max-lg:h-[392px] max-lg:px-6 max-lg:pb-6 max-lg:pt-16 max-sm:px-4">
+    <div className="mx-auto grid h-full max-w-[1280px] grid-cols-[1fr_220px_220px] gap-20 max-lg:block">
+      <div className="flex h-full flex-col max-lg:block">
         <h2 className="text-[32px] font-black tracking-[-0.02em] max-lg:text-[28px] max-sm:text-[24px]">
           {footerContent.siteName}
         </h2>
-        <p className="mt-[178px] text-xs font-black max-lg:mt-6 max-lg:text-sm">
+        <p className="mt-auto text-xs font-black max-lg:mt-8 max-lg:text-sm">
           {footerContent.copyright}
         </p>
       </div>

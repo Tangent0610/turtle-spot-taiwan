@@ -1,11 +1,10 @@
 "use client";
 
-import type { MouseEvent, PointerEvent, TouchEvent } from "react";
+import type { PointerEvent } from "react";
 import { useRef } from "react";
 import { swipeThreshold } from "@/config/ui";
 
-export type SwipeEvent =
-  PointerEvent<HTMLElement> | MouseEvent<HTMLElement> | TouchEvent<HTMLElement>;
+export type SwipeEvent = PointerEvent<HTMLElement>;
 
 export const useSwipe = ({
   onTap,
@@ -51,35 +50,12 @@ export const useSwipe = ({
 
     onPrevious();
   };
-  const getTouchPoint = (event: TouchEvent<HTMLElement>) =>
-    event.changedTouches[0] ?? event.touches[0];
-
   return {
-    onMouseDown: (event: MouseEvent<HTMLElement>) =>
-      startSwipe(event.clientX, event.clientY),
-    onMouseLeave: reset,
-    onMouseUp: (event: MouseEvent<HTMLElement>) =>
-      endSwipe(event.clientX, event.clientY, event),
     onPointerCancel: reset,
     onPointerDown: (event: PointerEvent<HTMLElement>) =>
       startSwipe(event.clientX, event.clientY),
     onPointerLeave: reset,
     onPointerUp: (event: PointerEvent<HTMLElement>) =>
       endSwipe(event.clientX, event.clientY, event),
-    onTouchCancel: reset,
-    onTouchEnd: (event: TouchEvent<HTMLElement>) => {
-      const touch = getTouchPoint(event);
-
-      if (touch) {
-        endSwipe(touch.clientX, touch.clientY, event);
-      }
-    },
-    onTouchStart: (event: TouchEvent<HTMLElement>) => {
-      const touch = getTouchPoint(event);
-
-      if (touch) {
-        startSwipe(touch.clientX, touch.clientY);
-      }
-    },
   };
 };

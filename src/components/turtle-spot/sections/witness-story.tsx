@@ -22,26 +22,14 @@ export const WitnessStory = ({ activities }: { activities: Activity[] }) => {
   const selectIndicator = (index: number) => {
     setActiveIndex(index % activities.length);
   };
-  const getTapX = (event: SwipeEvent) => {
-    if ("clientX" in event) {
-      return event.clientX;
-    }
-
-    const touch = event.changedTouches[0] ?? event.touches[0];
-
-    return touch?.clientX ?? 0;
-  };
   const handleMobileTap = (event: SwipeEvent) => {
-    if (
-      window.innerWidth >= 768 ||
-      (event.target as HTMLElement).closest("a,button")
-    ) {
+    if ((event.target as HTMLElement).closest("a,button")) {
       return;
     }
 
     const rect = event.currentTarget.getBoundingClientRect();
 
-    if (getTapX(event) >= rect.left + rect.width / 2) {
+    if (event.clientX >= rect.left + rect.width / 2) {
       showNext();
     }
   };
