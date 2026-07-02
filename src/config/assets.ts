@@ -3,7 +3,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const assetPath = (path: string) => `${basePath}${path}`;
 
 export const audioAssets = {
-  ambientLoop: "/audio/ambient-loop.ogg",
+  ambientLoop: "/audio/ocean-waves.mp3",
 } as const;
 
 export const imageAssets = {

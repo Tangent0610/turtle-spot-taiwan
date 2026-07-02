@@ -31,7 +31,7 @@ export const WitnessPhone = ({
     : null;
 
   return (
-    <article className="flex h-[min(680px,132.3vw)] w-[min(560px,83vw)] flex-col rounded-t-[40px] bg-turtle-ink px-[5.5%] pt-[4.5%] text-center text-turtle-white">
+    <article className="flex h-[min(680px,132.3vw)] w-[min(560px,83vw)] flex-col rounded-t-[40px] bg-turtle-ink px-6 pt-5 text-center text-turtle-white max-xl:px-[5.5%] max-xl:pt-[4.5%]">
       <div>
         <div className="flex gap-3 max-xl:gap-2 max-md:gap-2">
           {Array.from({ length: witnessIndicatorCount }, (_, index) => (
@@ -49,7 +49,7 @@ export const WitnessPhone = ({
             />
           ))}
         </div>
-        <div className="mt-7 flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-turtle-muted max-md:mt-4 max-md:gap-2 max-md:text-[11px]">
+        <div className="mt-4 flex items-center gap-3 whitespace-nowrap text-[15px] font-black text-turtle-muted max-md:gap-2 max-md:text-[11px]">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-turtle-white text-turtle-ink max-md:h-7 max-md:w-7">
             <FocusIcon className="h-6 w-6 max-md:h-5 max-md:w-5" />
           </span>

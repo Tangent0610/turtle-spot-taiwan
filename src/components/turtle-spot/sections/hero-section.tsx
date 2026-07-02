@@ -17,7 +17,7 @@ export const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-turtle-aqua pb-0 pt-36 max-xl:pb-[21px] max-xl:pt-[88px] max-sm:pb-0 max-sm:pt-[120px]">
       <MarqueeText
-        className="top-[236px] text-[190px] text-turtle-white/80 max-xl:top-[161px] max-xl:text-[88px] max-sm:top-[190px]"
+        className="top-[236px] text-[190px] text-turtle-white/80 max-xl:top-[244px] max-xl:text-[88px] max-lg:top-[204px] max-sm:top-[190px]"
         text="Information Information"
       />
 
