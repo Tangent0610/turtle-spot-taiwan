@@ -43,8 +43,8 @@ export const dictionaries = {
       "Turtle Map",
       "Articles",
       "About Us",
-      "Education Resources",
-      "Report Sightings",
+      "Education",
+      "Reports",
     ],
     factLabels: [
       "Name",
